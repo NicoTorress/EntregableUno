@@ -52,9 +52,17 @@ class Viaje {
         $this -> pasajeros = $pasajeros;
     } 
 
-    public function losPasajeros (){
-        print_r($this->getPasajeros());
-    } 
+    public function mostrarDatosPasajeros(){
+        $cadena="";
+        $colPasajeros = $this->getPasajeros();
+        for($i=1; $i< count($colPasajeros)+1 ;$i++){
+            $nombre= $colPasajeros[$i]["nombre"];
+            $apellido= $colPasajeros[$i]["apellido"];
+            $dni= $colPasajeros[$i]["dni"];
+            $cadena = $cadena." Pasajero ".$i.": ".$nombre." ".$apellido." ".$dni. "\n";
+        }
+        return $cadena;
+    }
 
     public function modificacionViaje($codigoDos, $destinoDos){
         $this -> setCodigo($codigoDos);
@@ -69,7 +77,8 @@ class Viaje {
         return 
         "Código de viaje: ". $this->getCodigo().
         "\nDestino del viaje: ". $this-> getDestino().
-        "\nCantidad de pasajeros que viajan: ". $this-> getCantMaxPasajeros(). "\n \n";
+        "\nCantidad de pasajeros que viajan: ". $this-> getCantMaxPasajeros(). "\n \n".
+        "\n". $this-> mostrarDatosPasajeros();
     }
 
 }

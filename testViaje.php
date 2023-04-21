@@ -8,9 +8,9 @@ function seleccionarOpcion(){
 
     echo "\n-----------MENÚ DE OPCIONES-----------\n" ;
     echo "1. CARGAR DATOS DEL VIAJE \n";
-    echo "2. MOSTRAR DATOS DEL VIAJE Y PASAJEROS \n";
+    echo "2. MODIFICAR DATOS DE LOS PASAJEROS\n";
     echo "3. MODIFICAR DATOS DEL VIAJE\n";
-    echo "4. MODIFICAR DATOS DE LOS PASAJEROS\n";
+    echo "4. MOSTRAR DATOS DEL VIAJE Y PASAJEROS \n";
     echo "5. SALIR\n";
     echo "\nIngrese su opción: ";
     $eleccion = solicitarNumeroEntre(1, 5);
@@ -49,24 +49,6 @@ function cargarPasajeros($cantMaxPasajeros){
 
     return $cargaPasajeros;
 }
-
-/* function cambiarDatos ($cantMaxPasajeros, $numPasajero, $pasajeros){
-    $i = 1;
-    while ($i < ($cantMaxPasajeros+1) && in_array($numPasajero, $pasajeros)){
-        echo "Ingrese el nuevo nombre: ";
-        $nombreDos = trim(fgets(STDIN));
-        echo "Ingrese el nuevo apellido: ";
-        $apellidoDos = trim(fgets(STDIN));
-        echo "Ingrese el nuevo DNI: ";
-        $documentoDos = trim(fgets(STDIN));
-        
-        $pasajeros [$i] = ["nombre"=>$nombreDos, "apellido"=>$apellidoDos, "dni"=>$documentoDos];
-
-    $i++;
-    }
-         
-    return $pasajeros; 
-}*/
 
 function cambiarUnSoloDato ($llave){
     
@@ -118,9 +100,16 @@ do {
 
         case 2: 
             
-            echo $objetoViaje;
-            $objetoViaje -> losPasajeros();
-            
+            echo "Indique que N° de pasajero desea modificar: ";
+            $numPasajero = solicitarNumeroEntre(1, $cantMaxPasajeros);
+            echo "1. MODIFICAR NOMBRE";
+            echo "\n2. MODIFICAR APELLIDO";
+            echo "\n3. MODIFICAR DNI";
+            echo "\nIngrese su opción: ";
+            $opcionSeleccionada = solicitarNumeroEntre(1, 3);
+            $llaveDelDato = cambiarUnSoloDato($opcionSeleccionada);
+            $datoModificado = modificacionDelDato($opcionSeleccionada);
+            $objetoViaje -> modificacionPasajeros($opcionSeleccionada, $llaveDelDato, $datoModificado);     
             
             break;
 
@@ -137,16 +126,8 @@ do {
 
         case 4: 
 
-            echo "Indique que N° de pasajero desea modificar: ";
-            $numPasajero = solicitarNumeroEntre(1, $cantMaxPasajeros);
-            echo "1. MODIFICAR NOMBRE";
-            echo "\n2. MODIFICAR APELLIDO";
-            echo "\n3. MODIFICAR DNI";
-            echo "\nIngrese su opción: ";
-            $opcionSeleccionada = solicitarNumeroEntre(1, 3);
-            $llaveDelDato = cambiarUnSoloDato($opcionSeleccionada);
-            $datoModificado = modificacionDelDato($opcionSeleccionada);
-            $objetoViaje -> modificacionPasajeros($opcionSeleccionada, $llaveDelDato, $datoModificado);
+            echo $objetoViaje;
+            //echo $objetoViaje->mostrarDatosPasajeros();
         
 
             break;
